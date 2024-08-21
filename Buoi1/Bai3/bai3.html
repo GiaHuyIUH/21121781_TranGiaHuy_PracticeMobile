@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        const dolphinsScores = [97, 112, 101];
+        const koalasScores = [109, 95, 106];
+
+        const average = scores => scores.reduce((a, b) => a + b, 0) / scores.length;
+        const dolphinsAvg = average(dolphinsScores);
+        const koalasAvg = average(koalasScores);
+
+        if (dolphinsAvg > koalasAvg && dolphinsAvg >= 100) {
+            console.log(`Dolphins win with an average score of ${dolphinsAvg}!`);
+        } else if (koalasAvg > dolphinsAvg && koalasAvg >= 100) {
+            console.log(`Koalas win with an average score of ${koalasAvg}!`);
+        } else if (dolphinsAvg === koalasAvg && dolphinsAvg >= 100 && koalasAvg >= 100) {
+            console.log(`It's a draw with both teams scoring an average of ${dolphinsAvg}!`);
+        } else {
+            console.log('No team wins the trophy.');
+        }
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
