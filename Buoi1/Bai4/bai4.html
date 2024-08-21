@@ -6,13 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script>
-        const bill = 275;
+        const bill = [275, 40, 430];
 
-        const tip = (bill >= 50 && bill <= 300) ? bill * 0.15 : bill * 0.2;
-
-        const total = bill + tip;
-
-        console.log(`The bill was ${bill}, the tip was ${tip.toFixed(2)}, and the total value ${total.toFixed(2)}`);
+        array.forEach(bill => {
+            const tip = (bill >= 50 && bill <= 300) ? bill * 0.15 : bill * 0.2;
+            const total = bill + tip;
+            console.log(`The bill was ${bill}, the tip was ${tip}, and the total value ${total}`);
+        });
     </script>
 </head>
 
