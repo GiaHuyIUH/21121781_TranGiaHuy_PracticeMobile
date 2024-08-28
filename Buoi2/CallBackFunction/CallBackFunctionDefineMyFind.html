@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      var strings = [
+        "Jerries",
+        "Apple",
+        "Watermelon",
+        "Strawberry",
+        "Banana",
+        "Pine apple",
+      ];
+      // Nếu tồn tại trả về phần tử trong mảng nếu không trả về undefined
+      var result1 = strings.find((name) => name === "1");
+      console.log(result1);
+      var result2 = strings.find((name) => name === "Pine apple");
+      console.log(result2);
+
+      Array.prototype.myFind = function (callback) {
+        let length = this.length;
+        for (let index = 0; index < length; index++) {
+          if (callback(this[index])) return this[index];
+        }
+        return undefined;
+      };
+
+      var result3 = strings.myFind((name) => name === "Banana");
+      console.log(result3);
+    </script>
+  </head>
+  <body></body>
+</html>
