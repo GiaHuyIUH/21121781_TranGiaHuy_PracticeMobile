@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      var strings = ["Tran", "Gia", "Huy", "Dep", "Trai"];
+      var result1 = strings.join(" ");
+      console.log(result1);
+
+      Array.prototype.myJoin = function (separator) {
+        let length = this.length;
+        let result = "";
+        for (let index = 0; index < length; index++) {
+          result += this[index];
+          if (index < length - 1) {
+            result += separator;
+          }
+        }
+        return result;
+      };
+
+      var result2 = strings.myJoin(" ");
+      console.log(result2);
+    </script>
+  </head>
+  <body></body>
+</html>
