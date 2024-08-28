@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var studentMark = [9.5, 10, 7.5, 6.5, 8, 5, 3]
+
+        var result1 = studentMark.some(x => x < 2)
+        console.log(result1);
+
+        Array.prototype.mySome = function(callback) {
+            for (var i = 0; i < this.length; i++) {
+                if (callback(this[i])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        var result2 = studentMark.mySome(x => x < 2)
+        console.log(result2);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
