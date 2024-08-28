@@ -1,4 +1,4 @@
-# Lab-PhátTriểnWeb-IUH
+# Lập Trình Thiết Bị Di Động
 
 ## Giới thiệu
 Lập Trình di động React-native là dự án học tập nhằm mục đích xây dựng ứng dụng di động cơ bản sử dụng công nghệ React Native. Dự án tập trung vào việc hiểu và áp dụng các chức năng cơ bản, thiết kế giao diện người dùng và tích hợp API trong quá trình phát triển ứng dụng di động.
