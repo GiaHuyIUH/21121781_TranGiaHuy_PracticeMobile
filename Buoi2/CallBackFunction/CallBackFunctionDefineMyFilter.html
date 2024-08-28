@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+        var arr = [4, 5, 7, 9, 22, 30, 15, 18, 19, 21];
+
+        function callBack(value) {
+            return value % 2 == 0;
+        }
+
+        var result1 = arr.filter(callBack);
+        console.log(result1);
+
+        // MyFilter
+
+        Array.prototype.myFilter = function(goilai) {
+            var arr = [];
+            for (var i = 0; i < this.length; i++) {
+                if (goilai(this[i])) {
+                    arr.push(this[i]);
+                }
+            }
+            return arr;
+        }
+
+        var result2 = arr.myFilter(callBack);
+        console.log(result2);
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
