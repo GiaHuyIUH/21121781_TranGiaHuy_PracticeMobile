@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      function printForecast(arr) {
+        let result = "";
+        let count = 0;
+        arr.forEach((element) => {
+          count++;
+          result += `... ${element}oC in ${count} days `;
+        });
+        return result;
+      }
+
+      var data1 = [17, 21, 23];
+      var data2 = [12, 5, -5, 0, 4];
+
+      console.log(printForecast(data1));
+      console.log(printForecast(data2));
+    </script>
+  </head>
+  <body></body>
+</html>
