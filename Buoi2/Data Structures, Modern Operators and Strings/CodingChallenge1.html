@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script>
+      var players1 = [
+        "Neuer",
+        "Pavard",
+        "Boateng",
+        "Alaba",
+        "Davies",
+        "Kimmich",
+        "Goretzka",
+        "Muller",
+        "Gnabry",
+        "Lewandowski",
+        "Coman",
+      ];
+      var players2 = [
+        "Burki",
+        "Piszczek",
+        "Hummels",
+        "Akanji",
+        "Hakimi",
+        "Weigl",
+        "Witsel",
+        "Sancho",
+        "Brandt",
+        "Hazard",
+        "Reus",
+      ];
+      // To get all elements except the first one using destructuring,
+      var [gk, ...fieldPlayers] = players1;
+      // Crate a new array with all players from team1 and team2
+      var allPlayers = [...players1, ...players2];
+
+      // Create a new array with original team1 players plus substitutes
+      var players1Final = [...players1, "Thiago", "Coutinho", "Perisic"];
+
+      var game = {
+        odds: {
+          team1: 1.33,
+          draw: 3.25,
+          team2: 6.5,
+        },
+        scored: ["Lewandowski", "Gnabry", "Lewandowski", "Hummels"],
+      };
+      // Print goals
+      function printGoals(...players) {
+        console.log(`${players.length} goals were scored by:`);
+        players.forEach((player) => console.log(player));
+      }
+
+      // Test data for printGoals function
+      printGoals("Davies", "Muller", "Lewandowski", "Kimmich");
+      printGoals(...game.scored);
+
+      var { team1, draw, team2 } = game.odds;
+      // Step 7: Print which team is more likely to win
+      console.log(
+        `Team more likely to win: ${team1 < team2 ? "Team 1" : "Team 2"}`
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
