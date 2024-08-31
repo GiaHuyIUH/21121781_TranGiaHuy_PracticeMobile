@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>
+      <button class="again">Again</button>
+      <input type="text" class="message" placeholder="Start guessing..." ></input>
+      <input class="number" type="number">?</input>
+      <input class="score" type="number">20</input>
+      <input type="number" class="guess" />
+      <style>
+        body {
+          background-color: #fff;
+        }
+        .number {
+          width: 15rem;
+        }
+      </style>
+    </div>
+
+    <script>
+      let score = 20;
+      let secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+      document.querySelector(".again").addEventListener("click", function () {
+        score = 20;
+        secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+        // Restore initial conditions of the message, number, score, and guess input fields
+        document.querySelector(".message").value = "";
+        document.querySelector(".number").textContent = "?";
+        document.querySelector(".score").textContent = score;
+        document.querySelector(".guess").value = "";
+
+        // Restore original background color and number width
+        document.querySelector("body").style.backgroundColor = "#222";
+        document.querySelector(".number").style.width = "15rem";
+      });
+    </script>
+  </body>
+</html>
