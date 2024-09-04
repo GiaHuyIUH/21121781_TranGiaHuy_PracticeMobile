@@ -1,34 +1,65 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
 export default function Page() {
   return (
-    <View style={styles.container}>
-      <View style={styles.main}>
-        <Text style={styles.title}>Hello World</Text>
-        <Text style={styles.subtitle}>This is the first page of your app.</Text>
+    <View style={{ flex: 1, backgroundColor: "#00CCF9" }}>
+      <View
+        style={{ flex: 1.5, justifyContent: "center", alignItems: "center" }}
+      >
+        <View
+          style={{
+            height: 100,
+            width: 100,
+            borderRadius: 50,
+            borderColor: "#000",
+            borderWidth: "12px",
+          }}
+        ></View>
+      </View>
+      <View style={{ flex: 1 }}>
+        <Text style={styles.h1}>GROW</Text>
+        <Text style={styles.h1}>YOUR BUSINESS</Text>
+      </View>
+      <View style={{ flex: 1.5 }}>
+        <Text style={styles.text}>
+          We will help you to grow your business using
+        </Text>
+        <Text style={styles.text}>online server</Text>
+        <View
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-around",
+            marginTop: 40,
+          }}
+        >
+          <TouchableOpacity style={styles.btn}>
+            <Text>LOGIN</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.btn}>
+            <Text>SIGN UP</Text>
+          </TouchableOpacity>
+        </View>
       </View>
     </View>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: "center",
-    padding: 24,
+const styles = {
+  h1: {
+    fontWeight: 700,
+    fontSize: 20,
+    textAlign: "center",
   },
-  main: {
-    flex: 1,
-    justifyContent: "center",
-    maxWidth: 960,
-    marginHorizontal: "auto",
+  text: {
+    fontWeight: 700,
+    textAlign: "center",
   },
-  title: {
-    fontSize: 64,
-    fontWeight: "bold",
+  btn: {
+    backgroundColor: "yellow",
+    paddingHorizontal: 20,
+    borderRadius: "10px",
+    paddingVertical: 10,
+    fontWeight: 600,
   },
-  subtitle: {
-    fontSize: 36,
-    color: "#38434D",
-  },
-});
+};
