@@ -15,6 +15,7 @@ export default function ForthScreen() {
 
   // Handle change for each input
   const handleChange = (text, index) => {
+    // Lấy ra mảng newOtp từ mảng otp
     const [...newOtp] = otp;
     newOtp[index] = text;
 
