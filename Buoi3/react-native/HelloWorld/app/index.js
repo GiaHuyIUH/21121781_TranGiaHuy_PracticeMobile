@@ -5,11 +5,12 @@ import ForthScreen from "./screens/ForthScreen";
 import FifthScreen from "./screens/FifthScreen";
 import SixthScreen from "./screens/SixthScreen";
 import SeventhScreen from "./screens/SeventhScreen";
+import EighthScreen from "./screens/EighthScreen";
 
 export default function Page() {
   return (
     <>
-      <SeventhScreen />
+      <EighthScreen />
     </>
   );
 }
