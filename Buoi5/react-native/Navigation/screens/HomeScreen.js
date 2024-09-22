@@ -4,13 +4,20 @@ import AntDesign from "@expo/vector-icons/AntDesign";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { useNavigation } from "@react-navigation/native";
 
-const HomeScreen = () => {
+const HomeScreen = ({ route }) => {
   const navigation = useNavigation();
+  const { selectedColor, source } = route.params;
+  console.log(selectedColor, source);
+
   return (
     <View style={styles.container}>
       <View style={{ flex: 2, width: "100%", height: "100%" }}>
         <Image
-          source={require("../assets/images/image.png")}
+          source={
+            source === undefined
+              ? require("../assets/images/image.png")
+              : source
+          }
           style={styles.image}
         />
       </View>
