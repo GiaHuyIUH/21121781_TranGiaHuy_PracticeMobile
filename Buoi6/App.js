@@ -1,24 +1,25 @@
-import {
-  View,
-  TouchableOpacity,
-  TextInput,
-} from 'react-native';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import HomeScreen from './screens/HomeScreen';
-import { AntDesign, FontAwesome, Entypo } from '@expo/vector-icons';
+import { View, TouchableOpacity, TextInput } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import HomeScreen from "./screens/HomeScreen";
+import { AntDesign, FontAwesome, Entypo } from "@expo/vector-icons";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import Fontisto from "@expo/vector-icons/Fontisto";
 
 const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 const CustomHeader = () => {
   return (
     <View
       style={{
-        flexDirection: 'row',
-        backgroundColor: 'blue',
-        justifyContent: 'space-around',
-        alignItems: 'center',
-      }}>
+        flex: 1,
+        flexDirection: "row",
+        backgroundColor: "#1BA9FF",
+        justifyContent: "space-evenly",
+        alignItems: "center",
+      }}
+    >
       <TouchableOpacity>
         <AntDesign
           name="arrowleft"
@@ -29,11 +30,12 @@ const CustomHeader = () => {
       </TouchableOpacity>
       <View
         style={{
-          flexDirection: 'row',
-          width: '60%',
-          backgroundColor: '#fff',
-          alignItems: 'center',
-        }}>
+          flexDirection: "row",
+          width: "60%",
+          backgroundColor: "#fff",
+          alignItems: "center",
+        }}
+      >
         <TouchableOpacity>
           <FontAwesome name="search" size={24} color="black" />
         </TouchableOpacity>
@@ -52,10 +54,10 @@ const CustomHeader = () => {
 export default function App() {
   const data = [
     {
-      id: '01',
-      name: 'Football',
+      id: "01",
+      name: "Football",
       price: 1200,
-      description: 'Course teach student to play football advanced',
+      description: "Course teach student to play football advanced",
     },
   ];
 
@@ -66,10 +68,47 @@ export default function App() {
           name="HomeScreen"
           component={HomeScreen}
           options={{
-            title: 'Welcome',
+            title: "Welcome",
             header: () => <CustomHeader />,
-          }}></Stack.Screen>
+          }}
+        ></Stack.Screen>
       </Stack.Navigator>
+
+      {/* <Tab.Navigator
+        screenOptions={{
+          tabBarActiveTintColor: "#1BA9FF",
+          tabBarStyle: { backgroundColor: "#1BA9FF" },
+        }}
+      >
+        <Tab.Screen
+          name="Menu"
+          component={{}}
+          options={{
+            tabBarIcon: () => {
+              <Entypo name="menu" size={24} color="black" />;
+            },
+          }}
+        />
+
+        <Tab.Screen
+          name="Menu"
+          component={{}}
+          options={{
+            tabBarIcon: () => {
+              <Entypo name="home" size={24} color="black" />;
+            },
+          }}
+        />
+        <Tab.Screen
+          name="Menu"
+          component={{}}
+          options={{
+            tabBarIcon: () => {
+              <Fontisto name="arrow-return-left" size={24} color="black" />;
+            },
+          }}
+        />
+      </Tab.Navigator> */}
     </NavigationContainer>
 
     // <SafeAreaView style={styles.container}>
