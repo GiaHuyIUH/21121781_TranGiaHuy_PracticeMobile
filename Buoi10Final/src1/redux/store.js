@@ -1,11 +1,10 @@
-import { createStore, applyMiddleware } from 'redux';
-import createSagaMiddleware from 'redux-saga';
-import { Provider } from 'react-redux';
-import rootReducer from './rootReducer';
-import rootSaga from './rootSaga';
+import { configureStore } from "@reduxjs/toolkit";
+import todoReducer from "./todoSlice";
 
-const sagaMiddleware = createSagaMiddleware();
-const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(rootSaga);
+const store = configureStore({
+  reducer: {
+    todos: todoReducer,
+  },
+});
 
 export default store;
