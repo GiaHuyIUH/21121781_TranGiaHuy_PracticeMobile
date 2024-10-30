@@ -1,61 +1,53 @@
-import { call, put, takeLatest } from "redux-saga/effects";
-import {
-  FETCH_TODOS_REQUEST,
-  fetchTodosSuccess,
-  fetchTodosFailure,
-  ADD_TODO_REQUEST,
-  DELETE_TODO_REQUEST,
-  UPDATE_TODO_REQUEST,
-} from "./todoActions";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-function* fetchTodos() {
-  try {
-    const response = yield call(
-      fetch,
-      "https://66ff62072b9aac9c997f1c11.mockapi.io/api/v1/todos"
-    );
-    const data = yield response.json();
-    yield put(fetchTodosSuccess(data));
-  } catch (error) {
-    yield put(fetchTodosFailure(error.message));
-  }
-}
+// Async thunk to handle adding a todo
+export const addTodo = createAsyncThunk(
+  "todos/addTodo",
+  async (todo, { rejectWithValue }) => {
+    try {
+      const response = await fetch(
+        "https://66ff62072b9aac9c997f1c11.mockapi.io/api/v1/todos",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ name: todo, status: false }),
+        }
+      );
 
-function* addTodoSaga(action) {
-  const { todo } = action.payload;
-  try {
-    const response = yield call(
-      fetch,
-      "https://66ff62072b9aac9c997f1c11.mockapi.io/api/v1/todos",
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(todo),
+      if (!response.ok) {
+        throw new Error("Failed to add todo");
       }
-    );
-    const data = yield response.json();
-    yield put({ type: "ADD_TODO_SUCCESS", payload: data });
-  } catch (error) {
-    console.error("Error adding todo:", error);
-  }
-}
 
-function* deleteTodoSaga(action) {
-  const { id } = action.payload;
-  try {
-    yield call(
-      fetch,
-      `https://66ff62072b9aac9c997f1c11.mockapi.io/api/v1/todos/${id}`,
-      { method: "DELETE" }
-    );
-    yield put({ type: "DELETE_TODO_SUCCESS", payload: id });
-  } catch (error) {
-    console.error("Error deleting todo:", error);
+      return await response.json();
+    } catch (error) {
+      return rejectWithValue(error.message);
+    }
   }
-}
+);
 
-export default function* todoSaga() {
-  yield takeLatest(FETCH_TODOS_REQUEST, fetchTodos);
-  yield takeLatest(ADD_TODO_REQUEST, addTodoSaga);
-  yield takeLatest(DELETE_TODO_REQUEST, deleteTodoSaga);
-}
+const todoSlice = createSlice({
+  name: "todos",
+  initialState: {
+    loading: false,
+    error: null,
+  },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder
+      .addCase(addTodo.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(addTodo.fulfilled, (state) => {
+        state.loading = false;
+      })
+      .addCase(addTodo.rejected, (state, action) => {
+        state.loading = false;
+        state.error = action.payload;
+      });
+  },
+});
+
+export default todoSlice.reducer;
