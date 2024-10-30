@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import {
   View,
   Image,
@@ -7,37 +7,22 @@ import {
   TouchableOpacity,
   TextInput,
 } from 'react-native';
+import { useDispatch, useSelector } from 'react-redux';
 import { UserContext } from '../context/UserContext';
+import { addTodoRequest } from '../redux/actions';
 import AntDesign from '@expo/vector-icons/AntDesign';
 import Entypo from '@expo/vector-icons/Entypo';
 
 const Screen3 = ({ navigation }) => {
   const { userName } = useContext(UserContext);
   const [todo, setTodo] = useState("");
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state);
 
-  const handleFinish = async () => {
-    try {
-      const response = await fetch('https://66ff62072b9aac9c997f1c11.mockapi.io/api/v1/todos', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          name: todo,
-          status: false,
-        }),
-      });
-
-       console.error(response);
-       if (response !== undefined) {
-         navigation.navigate("Detail");
-       }
-    }
-    catch(error) {
-      console.error(error);
-    }
-
-  }
+  const handleFinish = () => {
+    dispatch(addTodoRequest(todo));
+    navigation.navigate("Detail");
+  };
 
   return (
     <View style={styles.container}>
@@ -49,62 +34,35 @@ const Screen3 = ({ navigation }) => {
           style={{ width: 50, height: 50, borderRadius: 40 }}
         />
         <View style={{ justifyContent: 'space-between' }}>
-          <Text style={{ fontWeight: 700 }}>Hi {userName}</Text>
+          <Text style={{ fontWeight: 'bold' }}>Hi {userName}</Text>
           <Text style={{ color: '#696b6f', marginVertical: 10 }}>
-            Have agrate day ahead
+            Have a great day ahead
           </Text>
         </View>
       </View>
       <View>
-        <Text
-          style={{
-            textTransform: 'uppercase',
-            textAlign: 'center',
-            fontWeight: 600,
-            fontSize: 34,
-          }}>
-          add your job
-        </Text>
-        <View
-          style={{
-            flexDirection: 'row',
-            width: '100%',
-            borderWidth: 1,
-            borderColor: '#000',
-            marginVertical: 20,
-          }}>
-          <TouchableOpacity
-            style={{ paddingVertical: 10, marginHorizontal: 10 }}>
+        <Text style={styles.title}>Add Your Job</Text>
+        <View style={styles.inputContainer}>
+          <TouchableOpacity style={styles.icon}>
             <Entypo name="menu" size={24} color="#1dd75b" />
           </TouchableOpacity>
           <TextInput
             placeholder="Input your Job"
             onChangeText={setTodo}
-            style={{ paddingVertical: 10, width: '90%' }}></TextInput>
+            style={styles.input}
+          />
         </View>
       </View>
-      <View
-          style={{
-            width: '100%',
-            height: '100%',
-            flex: 0.5,
-            alignItems: 'center',
-          }}>
-          <TouchableOpacity
-            style={{
-              backgroundColor: '#26c3d9',
-              flexDirection: 'row',
-              width: '10%',
-              height: '20%',
-              borderRadius: 30,
-              justifyContent: 'center',
-              alignItems: 'center',
-              marginTop: 20,
-            }}
-            onPress={handleFinish}>
-            <AntDesign name="plus" size={24} color="white" />
-          </TouchableOpacity>
-        </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleFinish}
+          disabled={loading}
+        >
+          <AntDesign name="plus" size={24} color="white" />
+        </TouchableOpacity>
+        {error && <Text style={styles.error}>{error}</Text>}
+      </View>
     </View>
   );
 };
@@ -114,7 +72,45 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
   },
-  
+  title: {
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    fontWeight: '600',
+    fontSize: 34,
+  },
+  inputContainer: {
+    flexDirection: 'row',
+    width: '100%',
+    borderWidth: 1,
+    borderColor: '#000',
+    marginVertical: 20,
+  },
+  icon: {
+    paddingVertical: 10,
+    marginHorizontal: 10,
+  },
+  input: {
+    paddingVertical: 10,
+    width: '90%',
+  },
+  buttonContainer: {
+    width: '100%',
+    alignItems: 'center',
+    marginTop: 20,
+  },
+  button: {
+    backgroundColor: '#26c3d9',
+    flexDirection: 'row',
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  error: {
+    color: 'red',
+    marginTop: 10,
+  },
 });
 
 export default Screen3;
